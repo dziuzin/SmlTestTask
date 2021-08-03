@@ -6,6 +6,7 @@ using System.Text;
 using BLL.Interface.Dto;
 using BLL.Interface.Interface;
 using DAL.EF.Dto;
+using DAL.EF.EF.Context;
 using DAL.EF.EF.Entities;
 using DAL.EF.Repository.Base;
 using DAL.Interface.Repository;
@@ -17,24 +18,18 @@ namespace DAL.EF.Repository
         EfCrudRepository<Student, StudentDto, LocalStudentDto, int>,
         IStudentRepository
     {
-
-        // Переопределяем из-за настроек энтити
-        public override StudentDto GetOneById(int id)
+        public LocalStudentRepository(TestRestContext context) : base(context) { }
+        // Добавляем нужные справочники и тд
+        protected override IQueryable<Student> TheWholeEntities
         {
-            var item = TheWholeEntities
-                .Include(x => x.idSexNavigation)
-                .Include(x => x.idAcademicPerformanceNavigation)
-                .FirstOrDefault(x => x.id == id);
-            return new LocalStudentDto().ConvertToDto(item);
-        }
-
-        // Переопределяем из-за настроек энтити
-        public override List<StudentDto> Items()
-        {
-            return TheWholeEntities
-                .Include(x => x.idSexNavigation)
-                .Include(x => x.idAcademicPerformanceNavigation)
-                .Select(x => new LocalStudentDto().ConvertToDto(x)).ToList();
+            get
+            {
+                return db.Set<Student>()
+                    .Include(x => x.idSexNavigation)
+                    .Include(x => x.idAcademicPerformanceNavigation)
+                    .AsQueryable()
+                    .AsNoTracking();
+            }
         }
 
         // Переопределяем проверку на уникальность
@@ -45,6 +40,7 @@ namespace DAL.EF.Repository
                 && x.firstName.ToLower() == dto.firstName.ToLower()
                 && x.secondName.ToLower() == dto.secondName.ToLower()
                 && x.dob == dto.dob
+                && x.id != dto.id
             );
         }
     }

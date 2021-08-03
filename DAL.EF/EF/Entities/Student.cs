@@ -11,7 +11,7 @@ namespace DAL.EF.EF.Entities
         public string surName { get; set; }
         public string firstName { get; set; }
         public string secondName { get; set; }
-        public DateTime? dob { get; set; }
+        public DateTime dob { get; set; }
         public int idSex { get; set; }
         public int? idAcademicPerformance { get; set; }
 

@@ -6,6 +6,7 @@ using System.Text;
 using BLL.Interface.Dto;
 using BLL.Interface.Interface;
 using DAL.EF.Dto;
+using DAL.EF.EF.Context;
 using DAL.EF.EF.Entities;
 using DAL.EF.Repository.Base;
 using DAL.Interface.Repository;
@@ -18,6 +19,7 @@ namespace DAL.EF.Repository
         EfCrudRepository<AcademicPerformance, AcademicPerformanceDto, LocalAcademicPerformanceDto, int>,
         IAcademicPerformanceRepository
     {
+        public LocalAcademicPerformanceRepository(TestRestContext context) : base(context) { }
         // Переопределяем проверку на уникальность
         public override bool HasSameItem(AcademicPerformanceDto dto)
         {
@@ -25,6 +27,7 @@ namespace DAL.EF.Repository
                    x.code.ToLower() == dto.code.ToLower()
                 && x.description.ToLower() == dto.description.ToLower()
                 && x.name.ToLower() == dto.name.ToLower()
+                && x.id != dto.id
             );
         }
     }

@@ -3,7 +3,7 @@ using BLL.Interface.Dto;
 using Microsoft.AspNetCore.Mvc;
 using PL.API.Open.Controllers;
 
-namespace ReactApplication.Controllers
+namespace SmlTestTask.Controllers
 {
     [ApiController]
     [Route("[controller]")]
