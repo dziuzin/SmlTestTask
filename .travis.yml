@@ -7,4 +7,5 @@ before_script:
 script:
   - dotnet build SmlTestTask.sln -c Release
   - dotnet test BLL.Test/BLL.Test.csproj
+  - dotnet test SmlTestTask.Tests/SmlTestTask.Tests.csproj
   - dotnet test -c Release --no-build BLL.Test/BLL.Test.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
