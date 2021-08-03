@@ -1,4 +1,5 @@
 # Demo REST API for SML
+[![Build Status](https://travis-ci.com/dziuzin/SmlTestTask.svg?branch=main)](https://travis-ci.com/dziuzin/SmlTestTask)
 
 для запуска: 
 
