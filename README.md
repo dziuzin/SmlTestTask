@@ -13,7 +13,7 @@
 
 * BLL - слой логики
 * DAL - слой доступа к данным
-* ReactApplication - API
+* SmlTestTask - API
 
 
 Суффиксы: 
